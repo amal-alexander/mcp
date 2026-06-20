@@ -5,7 +5,7 @@
 ### One AI Command. Four Platforms. Instant SEO Intelligence.
 
 **Connect Claude Desktop to Google Search Console · GA4 · Bing Webmaster Tools · Adobe Analytics**  
-and ask questions in plain English — no dashboards, no exports, no switching tabs.
+and ask questions in plain English, with no dashboards, no exports, and no switching tabs.
 
 <br/>
 
@@ -25,7 +25,7 @@ and ask questions in plain English — no dashboards, no exports, no switching t
 
 ## 🤔 What Is This?
 
-This is a **Model Context Protocol (MCP) server** — a bridge that gives AI assistants direct, live access to your SEO data platforms.
+This is a **Model Context Protocol (MCP) server**: a bridge that gives AI assistants direct, live access to your SEO data platforms.
 
 Instead of:
 - Logging into 4 dashboards
@@ -43,17 +43,17 @@ The MCP server fetches the live data, runs the analysis, and gives you an answer
 
 ## 🔌 Works With Claude Desktop (Primary) + Other MCP Clients
 
-> **Important:** This server uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) — an open standard by Anthropic. It is **primarily designed for Claude Desktop**, which has the most complete and polished MCP support. It also works with other MCP-compatible clients:
+> **Important:** This server uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), an open standard by Anthropic. It is **primarily designed for Claude Desktop**, which has the most complete and polished MCP support. It also works with other MCP-compatible clients:
 
 | Client | Support Level | Notes |
 |--------|--------------|-------|
-| **Claude Desktop** ⭐ | ✅ Full | **Recommended — best experience** |
+| **Claude Desktop** ⭐ | ✅ Full | **Recommended - best experience** |
 | Cursor IDE | ✅ Full | Works via `.cursor/mcp.json` |
 | VS Code (Copilot) | 🔶 Partial | MCP support varies by extension |
 | Windsurf | ✅ Full | Supports MCP natively |
 | Other MCP Clients | 🔶 Varies | Must support MCP stdio transport |
 
-> **Not compatible with:** ChatGPT, Gemini, raw API calls, or browser-based AI tools — those do not support the MCP protocol.
+> **Not compatible with:** ChatGPT, Gemini, raw API calls, or browser-based AI tools, as those do not support the MCP protocol.
 
 ---
 
@@ -62,7 +62,7 @@ The MCP server fetches the live data, runs the analysis, and gives you an answer
 Paste any of these into **Claude Desktop** after setup:
 
 ```
-"My traffic dropped this week — find exactly when it started and which pages are responsible."
+"My traffic dropped this week, find exactly when it started and which pages are responsible."
 ```
 ```
 "Find keywords where I rank 8-15 with over 1,000 impressions. These are my quick wins."
@@ -100,7 +100,7 @@ Paste any of these into **Claude Desktop** after setup:
 
 > **Requirements:** Node.js 18+, npm, Windows/macOS/Linux, Claude Desktop installed
 
-### Step 1 — Clone & Install
+### Step 1: Clone & Install
 
 ```bash
 git clone https://github.com/amal-alexander/mcp.git
@@ -108,13 +108,13 @@ cd mcp
 npm install
 ```
 
-### Step 2 — Build
+### Step 2: Build
 
 ```bash
 npm run build
 ```
 
-### Step 3 — Run the Setup Wizard
+### Step 3: Run the Setup Wizard
 
 ```cmd
 node dist\index.js setup
@@ -124,7 +124,7 @@ You'll see an interactive menu:
 
 ```
 ╭──────────────────────────────────────────────╮
-│              MCP — Setup Wizard               │
+│              MCP: Setup Wizard               │
 │  GSC · Google Analytics 4 · Bing · Adobe     │
 │            Built by Amal Alexander            │
 ╰──────────────────────────────────────────────╯
@@ -140,7 +140,7 @@ Let's wire this up. Pick your integration.
 
 Pick each platform you want to connect. You can run it multiple times to add more.
 
-### Step 4 — Add to Claude Desktop Config
+### Step 4: Add to Claude Desktop Config
 
 The wizard prints the exact JSON to paste. Open this file:
 
@@ -162,13 +162,13 @@ Paste this:
 
 > Use forward slashes in the path, even on Windows. Replace with your actual clone location.
 
-### Step 5 — Restart Claude Desktop & Test
+### Step 5: Restart Claude Desktop & Test
 
 Restart Claude Desktop. You'll see the 🔧 tools icon appear. Then ask:
 
 > *"List my top 10 pages by impressions from Google Search Console for the last 30 days."*
 
-If you get data back — **you're live!** 🎉
+If you get data back: **you're live!** 🎉
 
 ---
 
@@ -177,33 +177,33 @@ If you get data back — **you're live!** 🎉
 <details>
 <summary><b>🔍 Google Search Console (click to expand)</b></summary>
 
-### Option A — OAuth (Easiest, Personal Accounts)
-1. Run `node dist\index.js setup` → select **1. Google Search Console**
+### Option A: OAuth (Easiest, Personal Accounts)
+1. Run `node dist\index.js setup` -> select **1. Google Search Console**
 2. Choose **Login with Google (OAuth 2.0)**
-3. Your browser opens → sign in → grant access
-4. Done — tokens saved to system keychain automatically
+3. Your browser opens -> sign in -> grant access
+4. Done, tokens are saved to the system keychain automatically
 
-### Option B — Service Account (Teams / CI)
-1. Go to [Google Cloud Console → Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
-2. Create service account → **Keys → Add Key → JSON** → download
-3. In Search Console → **Settings → Users and permissions → Add user** → paste service account email → **Full** permission
-4. Run setup → select **Setup Service Account** → paste the JSON file path
+### Option B: Service Account (Teams / CI)
+1. Go to [Google Cloud Console -> Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
+2. Create service account -> **Keys -> Add Key -> JSON** -> download
+3. In Search Console -> **Settings -> Users and permissions -> Add user** -> paste service account email -> **Full** permission
+4. Run setup -> select **Setup Service Account** -> paste the JSON file path
 </details>
 
 <details>
 <summary><b>📊 Google Analytics 4 (click to expand)</b></summary>
 
 1. Use the same service account JSON from GSC (the wizard offers to reuse it)
-2. In GA4 → **Admin → Property Access Management → + Add users** → paste service account email → **Viewer** role
-3. Run setup → select **2. Google Analytics 4** → wizard auto-fetches your properties
+2. In GA4 -> **Admin -> Property Access Management -> + Add users** -> paste service account email -> **Viewer** role
+3. Run setup -> select **2. Google Analytics 4** -> wizard auto-fetches your properties
 </details>
 
 <details>
 <summary><b>🔎 Bing Webmaster Tools (click to expand)</b></summary>
 
-1. Go to [Bing Webmaster Tools → Settings → API Access](https://www.bing.com/webmasters/settings/api)
+1. Go to [Bing Webmaster Tools -> Settings -> API Access](https://www.bing.com/webmasters/settings/api)
 2. Copy your API Key
-3. Run setup → select **3. Bing Webmaster Tools** → paste the key
+3. Run setup -> select **3. Bing Webmaster Tools** -> paste the key
 
 **Or set via CMD:**
 ```cmd
@@ -215,11 +215,11 @@ setx BING_API_KEY "your-api-key-here"
 <summary><b>🎨 Adobe Analytics (click to expand)</b></summary>
 
 1. Go to [Adobe Developer Console](https://developer.adobe.com/console/projects)
-2. Create project → **Add to Project → API → Adobe Analytics**
-3. Select **OAuth Server-to-Server** → **Save configured API**
+2. Create project -> **Add to Project -> API -> Adobe Analytics**
+3. Select **OAuth Server-to-Server** -> **Save configured API**
 4. Copy: **Client ID**, **Client Secret**, **IMS Org ID** (top-right of console.adobe.com)
-5. Find your **Report Suite ID** in Adobe Analytics → **Admin → Report Suites**
-6. Run setup → select **4. Adobe Analytics** → paste each value
+5. Find your **Report Suite ID** in Adobe Analytics -> **Admin -> Report Suites**
+6. Run setup -> select **4. Adobe Analytics** -> paste each value
 
 **Or run directly:**
 ```cmd
@@ -241,27 +241,27 @@ Claude: Here's your SEO health check for example.com (last 28 days):
 📈 Performance Overview
   • Total Clicks: 12,450 (+8.3% vs previous period)
   • Total Impressions: 284,000 (+2.1%)
-  • Average CTR: 4.38% (↓ from 4.71%)
+  • Average CTR: 4.38% (down from 4.71%)
   • Average Position: 18.4
 
 ⚠️ Anomalies Detected
-  • Traffic drop on June 14 — clicks fell 34% on /blog/guides/*
+  • Traffic drop on June 14: clicks fell 34% on /blog/guides/*
   • Correlates with Google algorithm update (June 13)
 
 🎯 Top 3 Quick Wins
-  1. /pricing — ranking #9 with 8,200 impressions. One push to top-5 = ~3,200 extra clicks/month
-  2. /features — CTR of 1.2% at position #3 — meta description likely needs rewriting
-  3. /blog/seo-tips — cannibalized by /resources/seo-guide — consolidate these pages
+  1. /pricing: ranking #9 with 8,200 impressions. One push to top-5 = ~3,200 extra clicks/month
+  2. /features: CTR of 1.2% at position #3, meta description likely needs rewriting
+  3. /blog/seo-tips is cannibalized by /resources/seo-guide, consolidate these pages
 ```
 
 ---
 
 ## 🛡️ Security & Privacy
 
-- **100% Local** — all credentials stay on your machine. Zero cloud storage.
-- **System Keychain** — Google tokens stored in Windows Credential Manager / macOS Keychain
-- **AES-256-GCM Encryption** — all other credentials encrypted with your hardware machine ID
-- **No middleman** — API calls go directly from your machine to Google/Bing/Adobe
+- **100% Local**: all credentials stay on your machine. Zero cloud storage.
+- **System Keychain**: Google tokens stored in Windows Credential Manager / macOS Keychain
+- **AES-256-GCM Encryption**: all other credentials encrypted with your hardware machine ID
+- **No middleman**: API calls go directly from your machine to Google/Bing/Adobe
 
 ---
 
@@ -274,7 +274,7 @@ Claude: Here's your SEO health check for example.com (last 28 days):
 | Tools show 0 results | Run `node dist\index.js diagnostics` |
 | Bing tools error | Set `BING_API_KEY` in environment or Claude config `env` block |
 | Adobe token 401 error | Check Client ID + Secret are correct in Developer Console |
-| GA4 shows no properties | Add service account email in GA4 Admin → Property Access Management |
+| GA4 shows no properties | Add service account email in GA4 Admin -> Property Access Management |
 | Claude doesn't show tools | Restart Claude Desktop after editing config |
 
 ---
@@ -287,7 +287,7 @@ Claude: Here's your SEO health check for example.com (last 28 days):
 ### Google Search Console
 | Tool | Description |
 |------|-------------|
-| `analytics_query` | Raw data — dimensions, filters, date ranges |
+| `analytics_query` | Raw data with dimensions, filters, and date ranges |
 | `analytics_trends` | Rising/falling trend detection |
 | `analytics_anomalies` | Statistical anomaly detection |
 | `analytics_drop_attribution` | Attribute drops to device/algorithm updates |
@@ -302,7 +302,7 @@ Claude: Here's your SEO health check for example.com (last 28 days):
 | `seo_keyword_clustering` | Semantic keyword grouping |
 | `seo_keyword_intent_classifier` | Transactional / Informational / Navigational |
 | `sites_health_check` | Full site health check |
-| `inspection_inspect` | URL Inspection — index status, mobile usability |
+| `inspection_inspect` | URL Inspection: index status, mobile usability |
 | `pagespeed_analyze` | Lighthouse + Core Web Vitals |
 | `schema_validate` | JSON-LD structured data validation |
 
@@ -331,7 +331,7 @@ Claude: Here's your SEO health check for example.com (last 28 days):
 ### Cross-Platform Intelligence
 | Tool | Description |
 |------|-------------|
-| `opportunity_matrix` | **Flagship** — GSC + GA4 + Bing combined |
+| `opportunity_matrix` | **Flagship** with GSC, GA4, and Bing combined |
 | `compare_engines` | Google vs Bing keyword comparison |
 | `traffic_health_check` | GSC clicks vs GA4 sessions gap analysis |
 | `brand_analysis` | Brand split across all platforms |
