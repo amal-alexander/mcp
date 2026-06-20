@@ -1,0 +1,92 @@
+{
+  "name": "Search Console MCP",
+  "theme": "mint",
+  "logo": "/images/search-console-mcp-logo.png",
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#4F46E5",
+    "light": "#818CF8",
+    "dark": "#312E81"
+  },
+  "seo": {
+    "metatags": {
+        "canonical": "https://searchconsolemcp.amal-alexander.com"
+    }
+},
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/amal-alexander/search-console-mcp"
+    }
+  ],
+  "navigation": {
+    "pages": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "getting-started/overview",
+          "getting-started/installation",
+          "getting-started/authentication",
+          "getting-started/accounts",
+          "getting-started/multi-account",
+          "getting-started/first-queries"
+        ]
+      },
+      {
+        "group": "Concepts",
+        "pages": [
+          "concepts/mcp-and-seo",
+          "concepts/architecture",
+          "concepts/data-vs-intelligence",
+          "concepts/trust-and-security"
+        ]
+      },
+      {
+        "group": "Tools",
+        "pages": [
+          "tools/analytics",
+          "tools/seo-intelligence",
+          "tools/ga4",
+          "tools/bing",
+          "tools/compare-engines",
+          "tools/inspection",
+          "tools/sites-and-sitemaps",
+          "tools/site-health"
+        ]
+      },
+      {
+        "group": "Workflows",
+        "pages": [
+          "workflows/investigate-traffic-drop",
+          "workflows/find-quick-wins",
+          "workflows/detect-cannibalization",
+          "workflows/weekly-seo-review"
+        ]
+      },
+      {
+        "group": "Prompts",
+        "pages": [
+          "prompts/magic-prompts",
+          "prompts/claude",
+          "prompts/cursor",
+          "prompts/generic-agents",
+          "prompts/unified-search"
+        ]
+      },
+      {
+        "group": "Contributing",
+        "pages": [
+          "contributing/philosophy",
+          "contributing/adding-tools",
+          "contributing/testing"
+        ]
+      },
+      "privacy-policy",
+      "terms-of-service",
+      "security"
+    ]
+  },
+  "footerSocials": {
+    "github": "https://github.com/amal-alexander/search-console-mcp"
+  }
+}

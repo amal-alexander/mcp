@@ -1,0 +1,24 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "src/index.ts",
+        "src/google/client.ts",
+        "src/bing/client.ts",
+        "src/google/tools/*.ts",
+        "src/bing/tools/*.ts",
+        "src/common/tools/*.ts"
+    ],
+    "out": "docs-site",
+    "name": "Search Console MCP Server API",
+    "includeVersion": true,
+    "plugin": [],
+    "exclude": [
+        "node_modules",
+        "tests",
+        "dist"
+    ],
+    "theme": "default",
+    "githubPages": true,
+    "readme": "README.md",
+    "cleanOutputDir": true
+}

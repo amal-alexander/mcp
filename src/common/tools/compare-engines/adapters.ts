@@ -1,0 +1,114 @@
+import { queryAnalytics, AnalyticsOptions } from "../../../google/tools/analytics.js";
+import { getBingClient, BingQueryStats, BingPageStats } from "../../../bing/client.js";
+import { CompareEnginesOptions } from "./types.js";
+import { searchconsole_v1 } from "googleapis";
+
+export async function fetchGoogleData(options: CompareEnginesOptions): Promise<searchconsole_v1.Schema$ApiDataRow[]> {
+  const analyticsOptions: AnalyticsOptions = {
+    siteUrl: options.siteUrl,
+    startDate: options.startDate,
+    endDate: options.endDate,
+    dimensions: [options.dimension],
+    limit: options.limit,
+    startRow: options.offset
+  };
+
+  try {
+    return await queryAnalytics(analyticsOptions);
+  } catch (error: any) {
+    // If site is not verified or other expected API error, return empty instead of crashing the whole comparison
+    const errMsg = error.message || '';
+    if (errMsg.includes('403') || errMsg.includes('forbidden') || errMsg.includes('permission')) {
+      console.warn(`CompareEngines: Google access denied for ${options.siteUrl}. Using empty data.`);
+      return [];
+    }
+    throw error;
+  }
+}
+
+export async function fetchBingData(options: CompareEnginesOptions): Promise<BingQueryStats[] | BingPageStats[]> {
+  const client = await getBingClient();
+  let rawData: (BingQueryStats | BingPageStats)[] = [];
+
+  // 1. Fetch Data
+  try {
+    if (options.dimension === "query") {
+      rawData = await client.getQueryStats(options.siteUrl);
+    } else if (options.dimension === "page") {
+      rawData = await client.getPageStats(options.siteUrl);
+    } else {
+      console.warn(`BingAdapter: Dimension '${options.dimension}' is not fully supported.`);
+      return [];
+    }
+  } catch (error: any) {
+    const errMsg = error.message || '';
+    if (errMsg.includes('403') || errMsg.includes('forbidden') || errMsg.includes('Authentication') || errMsg.includes('404')) {
+      console.warn(`CompareEngines: Bing access denied/not found for ${options.siteUrl}. Using empty data.`);
+      return [];
+    }
+    throw error;
+  }
+
+  // 2. Filter by Date
+  const start = new Date(options.startDate);
+  const end = new Date(options.endDate);
+
+  const filtered = rawData.filter(row => {
+    const rowDate = new Date(row.Date);
+    return rowDate >= start && rowDate <= end;
+  });
+
+  // 3. Aggregate by Key
+  const aggregated = new Map<string, {
+    clicks: number;
+    impressions: number;
+    weightedPos: number;
+    count: number;
+    key: string;
+  }>();
+
+  for (const row of filtered) {
+    // Bing API returns 'Query' field for both getQueryStats and getPageStats (where it contains the URL)
+    // Actually getPageStats interface says: Query: string; // The API returns URL in the 'Query' field
+    const key = row.Query;
+
+    if (!aggregated.has(key)) {
+      aggregated.set(key, { clicks: 0, impressions: 0, weightedPos: 0, count: 0, key });
+    }
+
+    const entry = aggregated.get(key)!;
+    entry.clicks += row.Clicks;
+    entry.impressions += row.Impressions;
+    entry.weightedPos += (row.AvgPosition * row.Impressions);
+    entry.count++;
+  }
+
+  // 4. Convert back to array
+  const result: (BingQueryStats | BingPageStats)[] = Array.from(aggregated.values()).map(entry => {
+    const avgPos = entry.impressions > 0 ? entry.weightedPos / entry.impressions : 0;
+    const ctr = entry.impressions > 0 ? (entry.clicks / entry.impressions) : 0; // Bing API CTR is usually a ratio 0-1 or percentage?
+    // Checking BingClient types, CTR is number. Usually Bing returns 0-100 or 0-1?
+    // GSC returns 0-1.
+    // I should check existing Bing analytics code.
+    // src/bing/tools/analytics.ts: ctr: impressions > 0 ? clicks / impressions : 0
+    // So we calculate it ourselves.
+
+    return {
+      Query: entry.key,
+      Clicks: entry.clicks,
+      Impressions: entry.impressions,
+      CTR: ctr,
+      AvgPosition: avgPos,
+      Date: options.startDate // Dummy date
+    };
+  });
+
+  // 5. Sort by Clicks (desc) to match GSC default
+  result.sort((a, b) => b.Clicks - a.Clicks);
+
+  // 6. Pagination
+  const limit = options.limit || 1000;
+  const offset = options.offset || 0;
+
+  return result.slice(offset, offset + limit);
+}

@@ -1,0 +1,55 @@
+{
+  "name": "search-console-mcp",
+  "version": "1.13.5",
+  "mcpName": "io.github.amal-alexander/search-console-mcp",
+  "description": "MCP server for Google Search Console, Bing Webmaster Tools, and Google Analytics 4",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "search-console-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "docs": "typedoc",
+    "deploy:registry": "mcp-publisher publish",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "bing-search",
+    "bing webmaster",
+    "google-search-console",
+    "seo",
+    "google analytics",
+    "ga4"
+  ],
+  "author": "Amal Alexander <amalalex95@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@adobe/structured-data-validator": "^1.7.0",
+    "@google-analytics/data": "^5.2.1",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "@napi-rs/keyring": "^1.2.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.3.1",
+    "googleapis": "^171.4.0",
+    "node-machine-id": "^1.1.12",
+    "open": "^11.0.0",
+    "re2": "^1.23.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "@types/re2": "^1.10.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "typedoc": "^0.28.16",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

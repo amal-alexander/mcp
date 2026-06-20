@@ -1,0 +1,80 @@
+---
+title: 'Privacy Policy'
+---
+
+# Privacy Policy
+
+**Effective Date:** 2026-02-01
+
+Search Console MCP is a local command-line (CLI) tool that connects to a user’s Google Search Console and Bing Webmaster Tools accounts to retrieve performance data.
+
+---
+
+## 1. Data Access
+
+Search Console MCP requests the following Google OAuth scope:
+
+- `https://www.googleapis.com/auth/webmasters.readonly` (Google)
+- `BING_API_KEY` Environment Variable (Bing)
+
+This provides **read-only access** to Google Search Console and Bing Webmaster Tools data.
+
+The application:
+- Does not request write access.
+- Does not modify Search Console data.
+- Does not access unrelated Google services.
+
+---
+
+## 2. Data Storage
+
+Search Console MCP operates entirely on the user’s local machine.
+
+- OAuth tokens (including refresh tokens) are stored locally.
+- Tokens are stored using the operating system’s secure credential storage when available (e.g., Keychain, Credential Manager, Secret Service).
+- If a fallback storage file is used, it is encrypted and restricted to the local user.
+
+No Search Console data is transmitted to or stored on any external server controlled by the developer.
+
+---
+
+## 3. Data Sharing
+
+Search Console MCP:
+
+- Does not sell user data.
+- Does not share user data with third parties.
+- Does not transmit Search Console data to the developer.
+
+All API requests are made directly from the user’s device to Google’s and Bing's servers.
+
+---
+
+## 4. Security
+
+The application follows industry best practices:
+
+- OAuth 2.0 Device Authorization Flow
+- Minimal read-only scopes
+- Secure local token storage
+- Strict file permissions (where applicable)
+
+Users may revoke access at any time via their Google Account permissions page.
+
+---
+
+## 5. User Control
+
+Users may:
+
+- Log out to remove locally stored credentials.
+- Revoke access through Google Account settings.
+- Stop using the application at any time.
+
+---
+
+## 6. Contact
+
+For questions or concerns:
+
+**Email:** amalalex95@gmail.com

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+coverage/
+.env
+.mcpregistry_*
+docs-site/
